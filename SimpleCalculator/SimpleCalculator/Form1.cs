@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
@@ -17,6 +18,7 @@ namespace SimpleCalculator
     {
         List<string> numbers = new List<string>();
         List<string> operations = new List<string>();
+        int memory = 0;
         public Calculator()
         {
             InitializeComponent();
@@ -24,6 +26,8 @@ namespace SimpleCalculator
             this.menuStrip1.ForeColor = Color.White;
             this.fileToolStripMenuItem.BackColor = Color.FromArgb(50, 50, 50);
             this.menuStrip1.ForeColor = Color.White;
+            listBox1.SelectionMode = SelectionMode.None;
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -35,8 +39,8 @@ namespace SimpleCalculator
             if (label1.Text == "Error") label1.Text = "";
             if (text == "+") AlgorithmOfOperation(text);
             else if (text == "-") AlgorithmOfOperation(text);
-            else if (text == "*") AlgorithmOfOperation(text);
-            else if (text == "/") AlgorithmOfOperation(text);
+            else if (text == "x") AlgorithmOfOperation(text);
+            else if (text == "÷") AlgorithmOfOperation(text);
             else if (text == "%") AlgorithmOfOperation(text);
             else if (text == "=")
             {
@@ -48,31 +52,36 @@ namespace SimpleCalculator
                     {
                         case "+":
                             label1.Text = $"{Convert.ToDecimal(numbers[0]) + Convert.ToDecimal(numbers[1])}";
+                            listBox1.Items.Add($"{numbers[0]} + {numbers[1]} = {label1.Text}");
                             numbers.Clear();
                             operations.Clear();
                             break;
                         case "-":
                             label1.Text = $"{Convert.ToDecimal(numbers[0]) - Convert.ToDecimal(numbers[1])}";
+                            listBox1.Items.Add($"{numbers[0]} - {numbers[1]} = {label1.Text}");
                             numbers.Clear();
                             operations.Clear();
                             break;
-                        case "*":
+                        case "x":
                             label1.Text = $"{Convert.ToDecimal(numbers[0]) * Convert.ToDecimal(numbers[1])}";
+                            listBox1.Items.Add($"{numbers[0]} x {numbers[1]} = {label1.Text}");
                             numbers.Clear();
                             operations.Clear();
                             break;
-                        case "/":
+                        case "÷":
                             if (numbers[1] == "0")
                             {
                                 label1.Text = "Error";
                                 break;
                             }
                             label1.Text = $"{Convert.ToDecimal(numbers[0]) / Convert.ToDecimal(numbers[1])}";
+                            listBox1.Items.Add($"{numbers[0]} ÷ {numbers[1]} = {label1.Text}");
                             numbers.Clear();
                             operations.Clear();
                             break;
                         case "%":
                             label1.Text = $"{Convert.ToDecimal(numbers[0]) / 100 * Convert.ToDecimal(numbers[1])}";
+                            listBox1.Items.Add($"{numbers[0]} % {numbers[1]} = {label1.Text}");
                             numbers.Clear();
                             operations.Clear();
                             break;
@@ -85,9 +94,8 @@ namespace SimpleCalculator
                     operations.Clear();
                     label2.Text = "";
                 }
-
             }
-            else if (text == "X")
+            else if (text == "⌧")
             {
                 if (label1.Text != "")
                 {
@@ -113,7 +121,7 @@ namespace SimpleCalculator
                     }
                 }
             }
-            else if (text == "x^2")
+            else if (text == "x²")
             {
                 if (label1.Text != "" && label1.Text != "0")
                 {
@@ -198,7 +206,7 @@ namespace SimpleCalculator
                     label2.Text += text;
                     label1.Text = "";
                     break;
-                case "*":
+                case "x":
                     label2.Text = $"{Convert.ToDecimal(numbers[0]) * Convert.ToDecimal(numbers[1])}";
                     numbers.Clear();
                     numbers.Add(label2.Text);
@@ -207,7 +215,7 @@ namespace SimpleCalculator
                     label2.Text += text;
                     label1.Text = "";
                     break;
-                case "/":
+                case "÷":
                     if (numbers[1] == "0") {
                         label1.Text = "Error";
                         break;
@@ -293,6 +301,12 @@ namespace SimpleCalculator
             this.button22.ForeColor = System.Drawing.Color.Black;
             this.button23.ForeColor = System.Drawing.Color.Black;
             this.button26.ForeColor = System.Drawing.Color.White;
+            this.button24.ForeColor = System.Drawing.Color.Black;
+            this.button25.ForeColor = System.Drawing.Color.Black;
+            this.button27.ForeColor = System.Drawing.Color.Black;
+            this.button28.ForeColor = System.Drawing.Color.Black;
+            listBox1.BackColor = Color.FromArgb(200, 200, 200);
+            listBox1.ForeColor = Color.Black;
             label1.ForeColor = System.Drawing.Color.Black;
             label2.ForeColor = System.Drawing.Color.Black;
             this.BackColor = Color.FromArgb(200, 200, 200);
@@ -354,16 +368,49 @@ namespace SimpleCalculator
             this.button22.ForeColor = System.Drawing.Color.White;
             this.button23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button23.ForeColor = System.Drawing.Color.White;
+            this.button24.ForeColor = System.Drawing.Color.White;
+            this.button25.ForeColor = System.Drawing.Color.White;
+            this.button27.ForeColor = System.Drawing.Color.White;
+            this.button28.ForeColor = System.Drawing.Color.White;
 
             this.button13.BackColor = System.Drawing.Color.Silver;
             this.button13.ForeColor = System.Drawing.Color.Black;
 
             this.BackColor = Color.FromArgb(30, 30, 30);
 
+            listBox1.BackColor = Color.FromArgb(30, 30, 30);
+            listBox1.ForeColor = Color.White;
             this.menuStrip1.BackColor = Color.FromArgb(50, 50, 50);
             this.menuStrip1.ForeColor = Color.White;
             this.fileToolStripMenuItem.BackColor = Color.FromArgb(50, 50, 50);
             this.menuStrip1.ForeColor = Color.White;
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            memory += Convert.ToInt32(label1.Text);
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            memory -= Convert.ToInt32(label1.Text);
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            memory = 0;
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            label1.Text = Convert.ToString(memory);
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            using (var sw = new StreamWriter("memorysave.txt", true)) {
+                sw.WriteLine(memory);
+            }
         }
     }
 }
