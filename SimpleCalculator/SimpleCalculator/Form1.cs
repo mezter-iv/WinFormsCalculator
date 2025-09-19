@@ -27,6 +27,7 @@ namespace SimpleCalculator
             this.fileToolStripMenuItem.BackColor = Color.FromArgb(50, 50, 50);
             this.menuStrip1.ForeColor = Color.White;
             listBox1.SelectionMode = SelectionMode.None;
+            this.KeyPreview = true;
 
         }
 
@@ -410,6 +411,99 @@ namespace SimpleCalculator
         {
             using (var sw = new StreamWriter("memorysave.txt", true)) {
                 sw.WriteLine(memory);
+            }
+        }
+
+        private void Calculator_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.NumPad1)
+            {
+                button16.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.NumPad2) { 
+                button23.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.NumPad3)
+            {
+                button8.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.NumPad4)
+            {
+                button15.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.NumPad5)
+            {
+                button22.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.NumPad6)
+            {
+                button7.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.NumPad7)
+            {
+                button12.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.NumPad8)
+            {
+                button20.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.NumPad9)
+            {
+                button4.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.NumPad9)
+            {
+                button23.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.NumPad0)
+            {
+                button21.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Oemplus)
+            {
+                button5.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.OemMinus)
+            {
+                button9.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Multiply)
+            {
+                button26.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Divide)
+            {
+                button17.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Insert)
+            {
+                button13.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Back)
+            {
+                button1.PerformClick();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.OemPeriod)
+            {
+                button6.PerformClick();
+                e.Handled = true;
             }
         }
     }
